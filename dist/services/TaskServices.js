@@ -37,10 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.taskServices = void 0;
-var taskHistoryRepo_1 = require("../repositories/taskHistoryRepo");
-var taskRepo_1 = require("../repositories/taskRepo");
-var userRepo_1 = require("../repositories/userRepo");
-var userTaskMapRepo_1 = require("../repositories/userTaskMapRepo");
+var task_history_repository_1 = require("../repositories/task-history.repository");
+var task_repository_1 = require("../repositories/task.repository");
+var user_repository_1 = require("../repositories/user.repository");
 var taskServices = /** @class */ (function () {
     function taskServices() {
         var _this = this;
@@ -50,18 +49,18 @@ var taskServices = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         if (!reqId) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.userRepository.getUserById(Number(reqId))];
+                        return [4 /*yield*/, this.userRepository.getOneById(Number(reqId))];
                     case 1:
                         user = _b.sent();
                         return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, this.userRepository.getUser(email)];
+                    case 2: return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 3:
                         user = _b.sent();
                         _b.label = 4;
                     case 4:
                         if (!user) return [3 /*break*/, 6];
                         _a = this.createReturnTaskList;
-                        return [4 /*yield*/, this.UserTaskMapRepository.getUserTask(user)];
+                        return [4 /*yield*/, this.userRepository.getTasks(user)];
                     case 5: return [2 /*return*/, _a.apply(this, [_b.sent()])];
                     case 6: throw new Error();
                 }
@@ -71,17 +70,17 @@ var taskServices = /** @class */ (function () {
             var user, newTask;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUser(email)];
+                    case 0: return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 1:
                         user = _a.sent();
                         if (!user) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.taskRepository.createUserTask(user, title, desc, status)];
+                        return [4 /*yield*/, this.taskRepository.add(user, title, desc, status)];
                     case 2:
                         newTask = _a.sent();
-                        return [4 /*yield*/, this.UserTaskMapRepository.userTaskMapping(newTask, user)];
+                        return [4 /*yield*/, this.userRepository.addTask(newTask, user)];
                     case 3:
                         _a.sent();
-                        return [4 /*yield*/, this.taskHistoryRepository.taskStatusHistory(newTask, status, user, status)];
+                        return [4 /*yield*/, this.taskHistoryRepository.add(newTask, status, user, status)];
                     case 4:
                         _a.sent();
                         return [2 /*return*/, newTask];
@@ -93,19 +92,19 @@ var taskServices = /** @class */ (function () {
             var taskToUpdate, user, oldStatus;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.taskRepository.getUserTask(taskId)];
+                    case 0: return [4 /*yield*/, this.taskRepository.getOneById(taskId)];
                     case 1:
                         taskToUpdate = _a.sent();
-                        return [4 /*yield*/, this.userRepository.getUser(email)];
+                        return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 2:
                         user = _a.sent();
                         if (!(taskToUpdate && user)) return [3 /*break*/, 5];
                         oldStatus = taskToUpdate.status;
-                        return [4 /*yield*/, this.taskRepository.updateTask(taskId, title, desc, status, user)];
+                        return [4 /*yield*/, this.taskRepository.update(taskId, title, desc, status, user)];
                     case 3:
                         _a.sent();
                         if (!(taskToUpdate.status != status)) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.taskHistoryRepository.taskStatusHistory(taskToUpdate, status, user, oldStatus)];
+                        return [4 /*yield*/, this.taskHistoryRepository.add(taskToUpdate, status, user, oldStatus)];
                     case 4:
                         _a.sent();
                         _a.label = 5;
@@ -113,21 +112,20 @@ var taskServices = /** @class */ (function () {
                 }
             });
         }); };
-        this.userRepository = new userRepo_1.userRepo();
-        this.taskRepository = new taskRepo_1.taskRepo();
-        this.UserTaskMapRepository = new userTaskMapRepo_1.UserTaskMapRepo();
-        this.taskHistoryRepository = new taskHistoryRepo_1.taskHistoryRepo();
+        this.userRepository = new user_repository_1.userRepo();
+        this.taskRepository = new task_repository_1.taskRepo();
+        this.taskHistoryRepository = new task_history_repository_1.taskHistoryRepo();
     }
     taskServices.prototype.deleteTask = function (email, taskId) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUser(email)];
+                    case 0: return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 1:
                         user = _a.sent();
                         if (!user) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.taskRepository.deleteTask(Number(taskId))];
+                        return [4 /*yield*/, this.taskRepository.delete(Number(taskId))];
                     case 2:
                         _a.sent();
                         return [3 /*break*/, 4];

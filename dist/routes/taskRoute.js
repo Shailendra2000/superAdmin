@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskRoute = void 0;
 var express_1 = require("express");
-var taskController_1 = require("../controllers/taskController");
+var task_controller_1 = require("../controllers/task.controller");
 var validateAdmin_1 = require("../middlewares/validateAdmin");
 var TaskRoute = /** @class */ (function () {
     function TaskRoute() {
         this.path = '/tasks';
         this.router = (0, express_1.Router)();
-        this.tasksController = new taskController_1.taskController();
+        this.tasksController = new task_controller_1.taskController();
         this.validateUserMiddleWare = new validateAdmin_1.validateUserMiddleWare();
         this.initializeRoutes();
     }

@@ -1,7 +1,7 @@
 import express from "express";
 import {AppDataSource } from './dataSource'
 import { DataSource } from "typeorm";
-import { IRoute } from "./interfaces/RouteInterface";
+import { IRoute } from "./interfaces/route.interface";
 import cors from 'cors'
 import bodyParser from "body-parser";
 

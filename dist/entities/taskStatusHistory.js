@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskStatusHistory = void 0;
 var typeorm_1 = require("typeorm");
-var task_1 = require("./task");
-var taskStatus_1 = require("./taskStatus");
-var user_1 = require("./user");
+var _1 = require("./");
 var TaskStatusHistory = /** @class */ (function () {
     function TaskStatusHistory() {
     }
@@ -22,24 +20,24 @@ var TaskStatusHistory = /** @class */ (function () {
         __metadata("design:type", Number)
     ], TaskStatusHistory.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return task_1.Task; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.Task; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", task_1.Task)
+        __metadata("design:type", _1.Task)
     ], TaskStatusHistory.prototype, "task", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return taskStatus_1.TaskStatus; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.TaskStatus; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", taskStatus_1.TaskStatus)
+        __metadata("design:type", _1.TaskStatus)
     ], TaskStatusHistory.prototype, "fromStatus", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return taskStatus_1.TaskStatus; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.TaskStatus; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", taskStatus_1.TaskStatus)
+        __metadata("design:type", _1.TaskStatus)
     ], TaskStatusHistory.prototype, "toStatus", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.User; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", user_1.User)
+        __metadata("design:type", _1.User)
     ], TaskStatusHistory.prototype, "user", void 0);
     TaskStatusHistory = __decorate([
         (0, typeorm_1.Entity)()

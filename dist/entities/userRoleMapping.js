@@ -11,8 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRoleMapping = void 0;
 var typeorm_1 = require("typeorm");
-var user_1 = require("./user");
-var role_1 = require("./role");
+var _1 = require("./");
 var UserRoleMapping = /** @class */ (function () {
     function UserRoleMapping() {
     }
@@ -21,14 +20,14 @@ var UserRoleMapping = /** @class */ (function () {
         __metadata("design:type", Number)
     ], UserRoleMapping.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.User; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", user_1.User)
+        __metadata("design:type", _1.User)
     ], UserRoleMapping.prototype, "user", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return role_1.Role; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.Role; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", role_1.Role)
+        __metadata("design:type", _1.Role)
     ], UserRoleMapping.prototype, "role", void 0);
     UserRoleMapping = __decorate([
         (0, typeorm_1.Entity)()

@@ -42,7 +42,7 @@ var userTaskMapping_1 = require("../entities/userTaskMapping");
 var UserTaskMapRepo = /** @class */ (function () {
     function UserTaskMapRepo() {
         var _this = this;
-        this.userTaskMapping = function (task, user) { return __awaiter(_this, void 0, void 0, function () {
+        this.addTask = function (task, user) { return __awaiter(_this, void 0, void 0, function () {
             var newUserTaskMapping;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -57,7 +57,7 @@ var UserTaskMapRepo = /** @class */ (function () {
                 }
             });
         }); };
-        this.getUserTask = function (user) { return __awaiter(_this, void 0, void 0, function () {
+        this.getTasks = function (user) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repo.find({ where: { user: user }, relations: { task: true } })];

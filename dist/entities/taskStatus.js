@@ -11,8 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskStatus = void 0;
 var typeorm_1 = require("typeorm");
-var task_1 = require("./task");
-var user_1 = require("./user");
+var _1 = require("./");
 var TaskStatus = /** @class */ (function () {
     function TaskStatus() {
     }
@@ -29,23 +28,23 @@ var TaskStatus = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], TaskStatus.prototype, "isActive", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function (type) { return user_1.User; }),
-        __metadata("design:type", user_1.User)
+        (0, typeorm_1.ManyToOne)(function (type) { return _1.User; }),
+        __metadata("design:type", _1.User)
     ], TaskStatus.prototype, "createdBy", void 0);
     __decorate([
         (0, typeorm_1.Column)('date'),
         __metadata("design:type", Date)
     ], TaskStatus.prototype, "createdAt", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function (type) { return user_1.User; }),
-        __metadata("design:type", user_1.User)
+        (0, typeorm_1.ManyToOne)(function (type) { return _1.User; }),
+        __metadata("design:type", _1.User)
     ], TaskStatus.prototype, "updatedBy", void 0);
     __decorate([
         (0, typeorm_1.Column)('date'),
         __metadata("design:type", Date)
     ], TaskStatus.prototype, "updatedAt", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function (type) { return task_1.Task; }, function (task) { return task.status; }),
+        (0, typeorm_1.OneToMany)(function (type) { return _1.Task; }, function (task) { return task.status; }),
         __metadata("design:type", Array)
     ], TaskStatus.prototype, "tasks", void 0);
     TaskStatus = __decorate([

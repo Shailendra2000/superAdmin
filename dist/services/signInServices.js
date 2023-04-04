@@ -35,11 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signInServices = void 0;
 var validateAdmin_1 = require("../middlewares/validateAdmin");
-var userRepo_1 = require("../repositories/userRepo");
-var jwtServices_1 = require("./jwtServices");
+var user_repository_1 = require("../repositories/user.repository");
+var jwt_services_1 = require("./jwt.services");
+var validator_1 = __importDefault(require("validator"));
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var signInServices = /** @class */ (function () {
     function signInServices() {
         var _this = this;
@@ -49,7 +54,7 @@ var signInServices = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         accessToken = this.jwtService.generateJwtToken(email);
-                        return [4 /*yield*/, this.userRepository.getUser(email)];
+                        return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 1:
                         user = _a.sent();
                         return [4 /*yield*/, this.validateUserMiddleWare.checkRights(user, this.adminRoleID)];
@@ -62,9 +67,38 @@ var signInServices = /** @class */ (function () {
                 }
             });
         }); };
+        this.registerUserToDb = function (username, email, password) { return __awaiter(_this, void 0, void 0, function () {
+            var saltRounds, salt, hashedPassword, accessToken, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!validator_1.default.isEmail(email)) {
+                            return [2 /*return*/, { 'message': 'invalid email' }];
+                        }
+                        saltRounds = 12;
+                        return [4 /*yield*/, bcrypt_1.default.genSalt(saltRounds)];
+                    case 1:
+                        salt = _a.sent();
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, salt)];
+                    case 2:
+                        hashedPassword = _a.sent();
+                        accessToken = this.jwtService.generateJwtToken(email);
+                        return [4 /*yield*/, this.userRepository.add(username, email, hashedPassword, accessToken)];
+                    case 3:
+                        response = _a.sent();
+                        if (!(response.message == 'sucess')) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this.userRepository.addRole(email, this.defaultUserRoleId)];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5: return [2 /*return*/, response];
+                }
+            });
+        }); };
+        this.defaultUserRoleId = 2;
         this.adminRoleID = 1;
-        this.jwtService = new jwtServices_1.jwtServices();
-        this.userRepository = new userRepo_1.userRepo();
+        this.jwtService = new jwt_services_1.jwtServices();
+        this.userRepository = new user_repository_1.userRepo();
         this.validateUserMiddleWare = new validateAdmin_1.validateUserMiddleWare();
     }
     return signInServices;

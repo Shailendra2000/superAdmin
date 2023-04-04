@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Task } from './task';
-import { TaskStatus } from './taskStatus';
-import { User } from './user';
+import { Task,TaskStatus,User } from './';
+
 
 @Entity()
 export class TaskStatusHistory {

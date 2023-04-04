@@ -47,7 +47,6 @@ var taskHistoryRepo = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(from);
                         newUserTaskHsitory = this.repo.create();
                         newUserTaskHsitory.toStatus = status;
                         newUserTaskHsitory.task = task;

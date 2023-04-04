@@ -39,12 +39,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRoleRepo = void 0;
 var dataSource_1 = require("../dataSource");
 var userRoleMapping_1 = require("../entities/userRoleMapping");
-var roleRepo_1 = require("./roleRepo");
-var userRepo_1 = require("./userRepo");
+var role_repository_1 = require("./role.repository");
+var user_repository_1 = require("./user.repository");
 var userRoleRepo = /** @class */ (function () {
     function userRoleRepo() {
         var _this = this;
-        this.getUserRoles = function (user) { return __awaiter(_this, void 0, void 0, function () {
+        this.getRole = function (user) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repo.find({ where: { user: user }, relations: { role: true } })];
@@ -52,7 +52,7 @@ var userRoleRepo = /** @class */ (function () {
                 }
             });
         }); };
-        this.getUserList = function (role) { return __awaiter(_this, void 0, void 0, function () {
+        this.getByRole = function (role) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repo.find({ relations: { user: true, role: true }, where: { role: role } })];
@@ -60,19 +60,18 @@ var userRoleRepo = /** @class */ (function () {
                 }
             });
         }); };
-        this.addUserRole = function (email, roleId) { return __awaiter(_this, void 0, void 0, function () {
+        this.addRole = function (email, roleId) { return __awaiter(_this, void 0, void 0, function () {
             var newUserRoleMapping, roleToAssign, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         newUserRoleMapping = this.repo.create();
-                        return [4 /*yield*/, this.roleRepository.getRole(roleId)];
+                        return [4 /*yield*/, this.roleRepository.getOneById(roleId)];
                     case 1:
                         roleToAssign = _a.sent();
-                        return [4 /*yield*/, this.userRepository.getUser(email)];
+                        return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 2:
                         user = _a.sent();
-                        console.log(roleToAssign, user);
                         if (!(roleToAssign && user)) return [3 /*break*/, 4];
                         newUserRoleMapping.role = roleToAssign;
                         newUserRoleMapping.user = user;
@@ -85,8 +84,8 @@ var userRoleRepo = /** @class */ (function () {
             });
         }); };
         this.repo = dataSource_1.AppDataSource.getRepository(userRoleMapping_1.UserRoleMapping);
-        this.userRepository = new userRepo_1.userRepo();
-        this.roleRepository = new roleRepo_1.roleRepo();
+        this.userRepository = new user_repository_1.userRepo();
+        this.roleRepository = new role_repository_1.roleRepo();
     }
     return userRoleRepo;
 }());

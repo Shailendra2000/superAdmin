@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.usersRoute = void 0;
 var express_1 = require("express");
-var userListController_1 = require("../controllers/userListController");
+var users_controller_1 = require("../controllers/users.controller");
 var validateAdmin_1 = require("../middlewares/validateAdmin");
 var usersRoute = /** @class */ (function () {
     function usersRoute() {
         this.path = '/users';
         this.router = (0, express_1.Router)();
-        this.usersController = new userListController_1.userController();
+        this.usersController = new users_controller_1.userController();
         this.validateUserMiddleWare = new validateAdmin_1.validateUserMiddleWare();
         this.initializeRoutes();
     }

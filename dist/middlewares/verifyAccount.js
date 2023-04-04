@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyAccountMiddleware = void 0;
 var bcrypt_1 = __importDefault(require("bcrypt"));
-var userRepo_1 = require("../repositories/userRepo");
+var user_repository_1 = require("../repositories/user.repository");
 var verifyAccountMiddleware = /** @class */ (function () {
     function verifyAccountMiddleware() {
         var _this = this;
@@ -54,7 +54,7 @@ var verifyAccountMiddleware = /** @class */ (function () {
                         data = req.body;
                         email = data.email;
                         password = data.password;
-                        return [4 /*yield*/, this.userRepository.getUserPassword(email)];
+                        return [4 /*yield*/, this.userRepository.getPassword(email)];
                     case 1:
                         userPassword = _a.sent();
                         return [4 /*yield*/, bcrypt_1.default.compare(password, userPassword)];
@@ -74,7 +74,7 @@ var verifyAccountMiddleware = /** @class */ (function () {
                 }
             });
         }); };
-        this.userRepository = new userRepo_1.userRepo();
+        this.userRepository = new user_repository_1.userRepo();
     }
     return verifyAccountMiddleware;
 }());

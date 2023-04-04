@@ -35,11 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateUserMiddleWare = void 0;
-var userRepo_1 = require("../repositories/userRepo");
-var userRoleMapRepo_1 = require("../repositories/userRoleMapRepo");
-var jwtServices_1 = require("../services/jwtServices");
+var repositories_1 = require("../repositories");
+var services_1 = require("../services");
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var validateUserMiddleWare = /** @class */ (function () {
     function validateUserMiddleWare() {
         var _this = this;
@@ -71,7 +74,7 @@ var validateUserMiddleWare = /** @class */ (function () {
                         userDetails = this.jwtService.verifyToken(token);
                         if (!userDetails) return [3 /*break*/, 5];
                         email = userDetails.Email;
-                        return [4 /*yield*/, this.userRepository.getUser(email)];
+                        return [4 /*yield*/, this.userRepository.getOneByEmail(email)];
                     case 1:
                         user = _c.sent();
                         if (!user) return [3 /*break*/, 3];
@@ -95,11 +98,40 @@ var validateUserMiddleWare = /** @class */ (function () {
                 }
             });
         }); };
+        this.verifyAccount = function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
+            var data, email, password, userPassword, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        data = req.body;
+                        email = data.email;
+                        password = data.password;
+                        return [4 /*yield*/, this.userRepository.getPassword(email)];
+                    case 1:
+                        userPassword = _a.sent();
+                        return [4 /*yield*/, bcrypt_1.default.compare(password, userPassword)];
+                    case 2:
+                        if (_a.sent()) {
+                            next();
+                        }
+                        else {
+                            throw new Error();
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        res.status(400).json({ 'message': 'invalid' });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); };
         this.checkRights = function (user, roleId) { return __awaiter(_this, void 0, void 0, function () {
             var userRoles, _i, userRoles_1, role;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRoleRepository.getUserRoles(user)];
+                    case 0: return [4 /*yield*/, this.userRepository.getRole(user)];
                     case 1:
                         userRoles = _a.sent();
                         for (_i = 0, userRoles_1 = userRoles; _i < userRoles_1.length; _i++) {
@@ -112,10 +144,9 @@ var validateUserMiddleWare = /** @class */ (function () {
                 }
             });
         }); };
-        this.jwtService = new jwtServices_1.jwtServices();
+        this.jwtService = new services_1.jwtServices();
         this.superAdminRoleId = 1;
-        this.userRepository = new userRepo_1.userRepo();
-        this.userRoleRepository = new userRoleMapRepo_1.userRoleRepo();
+        this.userRepository = new repositories_1.userRepo();
     }
     return validateUserMiddleWare;
 }());

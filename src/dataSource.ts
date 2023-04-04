@@ -1,12 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Role } from "./entities/role"
-import { Task } from "./entities/task"
-import { TaskStatus } from "./entities/taskStatus"
-import { TaskStatusHistory } from "./entities/taskStatusHistory"
-import { User } from "./entities/user"
-import { UserRoleMapping } from "./entities/userRoleMapping"
-import { UserTaskMapping } from "./entities/userTaskMapping"
+import { Role,Task,User,UserRoleMapping,UserTaskMapping,TaskStatus,TaskStatusHistory } from "./entities"
 
 export const AppDataSource = new DataSource({
     type: "mysql",

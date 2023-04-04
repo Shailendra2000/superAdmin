@@ -42,9 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.signUpServices = void 0;
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var validator_1 = __importDefault(require("validator"));
-var userRepo_1 = require("../repositories/userRepo");
-var userRoleMapRepo_1 = require("../repositories/userRoleMapRepo");
-var jwtServices_1 = require("./jwtServices");
+var user_repository_1 = require("../repositories/user.repository");
+var jwt_services_1 = require("./jwt.services");
 var signUpServices = /** @class */ (function () {
     function signUpServices() {
         var _this = this;
@@ -64,11 +63,11 @@ var signUpServices = /** @class */ (function () {
                     case 2:
                         hashedPassword = _a.sent();
                         accessToken = this.jwtService.generateJwtToken(email);
-                        return [4 /*yield*/, this.userRepository.addUser(username, email, hashedPassword, accessToken)];
+                        return [4 /*yield*/, this.userRepository.add(username, email, hashedPassword, accessToken)];
                     case 3:
                         response = _a.sent();
                         if (!(response.message == 'sucess')) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.userRoleRepository.addUserRole(email, this.defaultUserRoleId)];
+                        return [4 /*yield*/, this.userRepository.addRole(email, this.defaultUserRoleId)];
                     case 4:
                         _a.sent();
                         _a.label = 5;
@@ -77,9 +76,8 @@ var signUpServices = /** @class */ (function () {
             });
         }); };
         this.defaultUserRoleId = 2;
-        this.jwtService = new jwtServices_1.jwtServices();
-        this.userRepository = new userRepo_1.userRepo();
-        this.userRoleRepository = new userRoleMapRepo_1.userRoleRepo();
+        this.jwtService = new jwt_services_1.jwtServices();
+        this.userRepository = new user_repository_1.userRepo();
     }
     return signUpServices;
 }());

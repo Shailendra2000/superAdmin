@@ -11,8 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserTaskMapping = void 0;
 var typeorm_1 = require("typeorm");
-var user_1 = require("./user");
-var task_1 = require("./task");
+var _1 = require("./");
 var UserTaskMapping = /** @class */ (function () {
     function UserTaskMapping() {
     }
@@ -21,14 +20,14 @@ var UserTaskMapping = /** @class */ (function () {
         __metadata("design:type", Number)
     ], UserTaskMapping.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.User; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", user_1.User)
+        __metadata("design:type", _1.User)
     ], UserTaskMapping.prototype, "user", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return task_1.Task; }),
+        (0, typeorm_1.ManyToOne)(function () { return _1.Task; }),
         (0, typeorm_1.JoinColumn)(),
-        __metadata("design:type", task_1.Task)
+        __metadata("design:type", _1.Task)
     ], UserTaskMapping.prototype, "task", void 0);
     UserTaskMapping = __decorate([
         (0, typeorm_1.Entity)()

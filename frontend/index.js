@@ -205,7 +205,6 @@ signupform.addEventListener('submit', (event) => {
     const password = formData.get('password');
     const username = formData.get('username');
     signup(email,password,username);
-    document.getElementById('formData2').reset()
 })
 
 
@@ -218,10 +217,12 @@ const signup=async(email,password,username)=>{
     });
     if(response.status==200){
         alert('account created sucessfully , please log in')
+        document.getElementById('formData2').reset()
         switchSignInUp()
     }
     else{
-        alert('account already exists / fill correct details')
+        const message = await response.json()
+        alert(`${message.message}`)
     }
 }
 
