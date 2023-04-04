@@ -1,0 +1,148 @@
+header{
+    display: flex;
+    padding:0 15px;
+    height: 70px;
+    justify-content: space-between;
+    background-color: rgb(230, 228, 228);
+    align-items: center;
+}
+
+.hidden{
+    display: none;
+}
+
+select{
+    height: 40px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+button {
+    color: #42aafa; /* Green */
+    border: none;
+    padding: 15px 32px;
+    background-color: rgb(230, 228, 228);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+}
+button:hover{
+    cursor: pointer;
+    color: red;
+}
+h3{
+    color: gray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.form-popup {
+    z-index: 2;
+        position: fixed;
+        top: 25%;
+        right: 40%;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+}
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  #myForm2{
+    display: none;
+  }
+
+  .taskContainer{
+    position: relative;
+    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap:30px;
+    padding: 20px;
+  }
+
+  .userContainer{
+    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap:30px;
+    padding: 20px;
+  }
+
+  #delbtn{
+    align-self: flex-start;
+    margin: 0 400px;
+  }
+
+  .taskCard{
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .taskCard:hover{
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  .taskCard *{
+    margin: 0;
+  }
+  #delete{
+    background-color: white;
+    color: red;
+    display: inline-block;
+    padding-top: 10px;
+  }
+  .userCard{
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    flex-direction: column;
+    padding: 20px;
+    width: 400px;
+  }
+  .userCard *{
+    margin: 0;
+  }
+  .userCard:hover{
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
